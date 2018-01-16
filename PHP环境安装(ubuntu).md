@@ -104,11 +104,11 @@
 * 允许mysql远程访问
 
 		vi /etc/mysql/mysql.conf.d/mysqld.cnf
-  	    bind-address            = 0.0.0.0
-  
-  	    # 登录mysql
-  	    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
-  	    FLUSH PRIVILEGES
+		bind-address            = 0.0.0.0
+
+    	# 登录mysql
+    	GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+    	FLUSH PRIVILEGES
 
 * 访问
 
