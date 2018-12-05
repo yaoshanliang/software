@@ -27,14 +27,18 @@
 
         $root = '/var/www/html/'; // 服务器目录
         $token = 'coding'; // token
-        $wwwUser = 'www-data'; //nginx所属用户
+        $wwwUser = 'www-data';
         $wwwGroup = 'www';
+        $log = '[' . date('Y-m-d H:i:s') . ']';
 
         $json = json_decode(file_get_contents('php://input'), true);
 
-        if (empty($json['token']) || $json['token'] !== $token) {
-            exit('error request');
-        }
+        /*if (empty($json['token']) || $json['token'] !== $token) {
+            $log = ' 缺少token或token错误';
+            file_put_contents('log', $log, FILE_APPEND);
+            exit;
+        }*/
+
 
         if (! ($repo = $_GET['repo'])) {
             $repo = $json['repository']['name'];
@@ -42,11 +46,18 @@
 
         $folder = $root . $repo;
 
-        $cmd = "cd $folder && git pull";
+        //$cmd = "sudo -Hu " . $wwwUser . " cd $folder && git pull 2>&1";
+        //$log .= $cmd;
+        $cmd =  " cd $folder && git pull 2>&1 ";
+        $log .= $cmd;
 
         $res = shell_exec($cmd);
+        $log .= json_encode($res);
+        $log .= "\n";
 
-        var_dump($res);
+        file_put_contents('log', $log, FILE_APPEND);
+
+        echo $log;
 
   
 ### 5、生成部署公钥
