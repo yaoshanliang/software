@@ -39,6 +39,18 @@
 
         # 重启fpm
         service php7.0-fpm restart
+	
+* 安装php7.1
+
+	    sudo apt-get install -y python-software-properties
+	    sudo add-apt-repository -y ppa:ondrej/php
+	    sudo apt-get update -y
+        
+	    sudo apt-get -y install php7.1
+        sudo apt-get -y install php7.1-mysql
+        sudo apt-get install php7.1-fpm
+
+        sudo apt-get install php7.1-curl php7.1-xml php7.1-mcrypt php7.1-json php7.1-gd php7.1-mbstring
 
  * 安装composer
 
@@ -109,8 +121,7 @@
     	# 登录mysql
     	GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
     	FLUSH PRIVILEGES
+	
+	    service mysql restart
 
-* 访问
 
-        前台：IP(域名)
-        后台：IP(域名)/admin 账户：admin 密码：admin
